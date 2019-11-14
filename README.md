@@ -34,6 +34,7 @@ The training process is not end-to-end in order to make use of the high performa
   ```
   - (Optinal) You can use the `kge_utils/split_valid.py` script to split a train and valid set 
   as well as an empty test set, which guarantees that all the entities and relations are seen in the training set. 
+  For more details, please read the `split_valid.py` file.
 
 ### 2. Run a KGE model in DGL-KE 
   - Copy the prepared dataset to the DGL-KE `data` folder. 
@@ -42,22 +43,24 @@ The training process is not end-to-end in order to make use of the high performa
     cp -r [path of your prepared dataset] [dgl/apps/kg/data/.]
   ```
   - Run a training script in DGL-KE. Remember to save the learned embeddings by providing the path with `--save_emb` when running
-`train.py`. Take the *FB15k* for example, `--dataset FB15k` indicates the name of the data directory. 
-    ```bash
-    cd dgl/apps/kg
-    python3 train.py --model DistMult --dataset FB15k --batch_size 1024 \
-        --neg_sample_size 256 --hidden_dim 2000 --gamma 500.0 --lr 0.1 --max_step 100000 \
-        --batch_size_eval 16 --gpu 0 --valid -adv --save_emb DistMult_FB15k_emb
-    ```
+`train.py`. `[dataset]` indicates the name of the data directory. 
+  ```bash
+  cd dgl/apps/kg
+  DGLBACKEND=pytorch  python3 train.py --model [model] --dataset [dataset] --batch_size 1024 \
+    --neg_sample_size 256 --hidden_dim 2000 --gamma 500.0 --lr 0.1 --max_step 100000 \
+    --batch_size_eval 16 --gpu 0 --valid -adv --save_emb emb
+  ```
 You may change different KGE models and hyperparameters and choose the learned embeddings with the best validation score.
 The learned entity embeddings (including item entities and non-item entities) are stored in the `[save_emb]/[dataset]_[model]_entity.npy` file.
 
-### 3. Extract the learned item entitiy embeddings to be item features
+### 3. Extract the learned entitiy embeddings as item features
   - Copy the `[save_emb]/[dataset]_[model]_entity.npy` file in the DGL-KE into this repo's `gen_feature/KG_trained_embed' folder
-  - Run the `gen_feature/convert_entityEmb2fea.py` script to generate the feature pickle file
+  - Run the `gen_feature/convert_entityEmb2fea.py` script to generate the feature pickle file. 
+  The `n_item` argument is required and defined by you own dataset. 
   ```bash
-  cp dgl/apps/kg/[save_emb]/[dataset]_[model]_entity.npy KG_aware_Recsys/gen_feature/KG_trained_embed/.
-  python convert_entityEmb2fea.py
+  cd gen_feature
+  cp dgl/apps/kg/[save_emb]/[dataset]_[model]_entity.npy KG_trained_embed/.
+  python convert_entityEmb2fea.py --n_item [n_item]
   ```
   
   Now the generated `[data_name]_entity_embed_features.pkl` file can be used as the input file in a recsys model, e.g., GraphSAGE/PinDAGE.
