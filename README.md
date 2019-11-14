@@ -8,8 +8,9 @@ The training process is not end-to-end in order to make use of the high performa
 
 ### 1. Prepare the item-KG data for DGL-KE:
   ```
-  git clone https://github.com/dmlc/dgl.git
+  git clone --recursive https://github.com/dmlc/dgl.git
   cd dgl/apps/kg
+  mkdir data
   ```
   - Please read the README of DGL-KE first. It is easy to follow.
   - We recommend you to format the KG data as `format 1` in the README page and split 5% of the KG triplets as a validation set. No testing set is required.
@@ -38,7 +39,7 @@ The training process is not end-to-end in order to make use of the high performa
   - Copy the prepared dataset to the DGL-KE `data` folder. 
   All the data should be in a directory and you should copy the entire directory to the `data` folder.
   ```bash
-    cp -r [path of your prepared dataset] [dgl//apps/kg/data/.]
+    cp -r [path of your prepared dataset] [dgl/apps/kg/data/.]
   ```
   - Run a training script in DGL-KE. Remember to save the learned embeddings by providing the path with `--save_emb` when running
 `train.py`. Take the *FB15k* for example, `--dataset FB15k` indicates the name of the data directory. 
