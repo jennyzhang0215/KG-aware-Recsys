@@ -40,7 +40,7 @@ The training process is not end-to-end in order to make use of the high performa
   - Copy the prepared dataset to the DGL-KE `data` folder. 
   All the data should be in a directory and you should copy the entire directory to the `data` folder.
   ```bash
-    cp -r [path of your prepared dataset] [dgl/apps/kg/data/.]
+  cp -r [path of your prepared dataset] [dgl/apps/kg/data/.]
   ```
   - Run a training script in DGL-KE. Remember to save the learned embeddings by providing the path with `--save_emb` when running
 `train.py`. `[dataset]` indicates the name of the data directory. 
