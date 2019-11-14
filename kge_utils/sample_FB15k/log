@@ -1,0 +1,4 @@
+sample_FB15k: val 0.05, test 0.0
+train	#entity: 18, #relation: 3, #triplet: 25
+valid	#entity: 2, #relation: 1, #triplet: 1
+test	#entity: 0, #relation: 0, #triplet: 0
