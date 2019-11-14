@@ -1,2 +1,5 @@
 .idea/*
 .idea/inspectionProfiles/*
+gen_feature/KGE_yelp2018_entity_embed_features.pkl
+.DS_Store
+gen_feature/KG_trained_embed/KGE_yelp2018_DistMult_entity.npy
