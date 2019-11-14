@@ -46,7 +46,7 @@ The training process is not end-to-end in order to make use of the high performa
 `train.py`. `[dataset]` indicates the name of the data directory. 
   ```bash
   cd dgl/apps/kg
-  DGLBACKEND=pytorch  python3 train.py --model [model] --dataset [dataset] --batch_size 1024 \
+  DGLBACKEND=pytorch python3 train.py --model [model] --dataset [dataset] --batch_size 1024 \
     --neg_sample_size 256 --hidden_dim 2000 --gamma 500.0 --lr 0.1 --max_step 100000 \
     --batch_size_eval 16 --gpu 0 --valid -adv --save_emb emb
   ```
